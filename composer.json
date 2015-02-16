@@ -28,6 +28,9 @@
     "autoload": {
         "psr-4": {
             "Anomaly\\RecentNewsWidgetExtension\\": "src/"
+        },
+        "psr-0": {
+            "SimplePie": "vendor/simplepie/simplepie/library"
         }
     },
     "extra": {
