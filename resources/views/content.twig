@@ -1,28 +1,18 @@
-{{ asset_add('styles.css', 'anomaly.extension.recent_news_widget::less/widget.less') }}
+{% for item in items %}
 
-<div class="media recent-news-widget">
-    {% for item in items %}
-
-        <!-- This is the calendar object to the left -->
-        <div class="media-left">
-            <a href="{{ item.get_permalink() }}" target="_blank">
-                <div class="date">
-                    <div class="day background-primary">{{ item.get_date()|date('j') }}</div>
-                    <div class="month text-muted">{{ item.get_date()|date('M') }}</div>
+    <p>
+        <a href="{{ item.get_permalink() }}" target="_blank">
+            <h2 class="ui header">
+                <div class="content">
+                    {{ item.get_title() }}
+                    <div class="sub header">{{ item.get_date()|date('F j, Y') }}</div>
                 </div>
-            </a>
-        </div>
+            </h2>
+        </a>
 
-        <!-- The link / description of the item -->
-        <div class="media-body">
-            <p>
-                <a href="{{ item.get_permalink() }}" target="_blank">
-                    <h4 class="media-heading">{{ item.get_title() }}</h4>
-                </a>
+        {{ item.get_description()|striptags }}
+    </p>
 
-                {{ item.get_description()|striptags }}
-            </p>
-        </div>
+    <div class="ui divider"></div>
 
-    {% endfor %}
-</div>
+{% endfor %}
