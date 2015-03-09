@@ -13,6 +13,8 @@
         {{ item.get_description()|striptags }}
     </p>
 
-    <div class="ui divider"></div>
+    {% if not loop.last %}
+        <div class="ui divider"></div>
+    {% endif %}
 
 {% endfor %}
