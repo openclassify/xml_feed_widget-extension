@@ -1,20 +1,31 @@
 {% for item in items %}
 
-    <p>
-        <a href="{{ item.get_permalink() }}" target="_blank">
-            <h2 class="ui header">
-                <div class="content">
-                    {{ item.get_title() }}
-                    <div class="sub header">{{ item.get_date()|date('F j, Y') }}</div>
-                </div>
-            </h2>
-        </a>
+    <div class="media">
 
-        {{ item.get_description()|striptags }}
-    </p>
+        <div class="media-left">
+            <i class="fa fa-calendar fa-2x text-muted"></i>
+        </div>
+
+        <div class="media-body">
+            <h4 class="media-heading">
+                <a href="{{ item.get_permalink() }}" target="_blank">
+                    {{ item.get_title() }}
+                </a>
+
+                <br>
+
+                <small>
+                    {{ item.get_date()|date('F j, Y') }}
+                </small>
+            </h4>
+
+            {{ item.get_description()|striptags }}
+        </div>
+
+    </div>
 
     {% if not loop.last %}
-        <div class="ui divider"></div>
+        <hr>
     {% endif %}
 
 {% endfor %}
