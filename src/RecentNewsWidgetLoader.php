@@ -1,16 +1,14 @@
 <?php namespace Anomaly\RecentNewsWidgetExtension;
 
-use Anomaly\DashboardModule\Dashboard\Component\Widget\Widget;
-
 /**
- * Class RecentNewsWidgetHandler
+ * Class RecentNewsWidgetLoader
  *
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
  * @package       Anomaly\RecentNewsWidgetExtension
  */
-class RecentNewsWidgetHandler
+class RecentNewsWidgetLoader
 {
 
     /**
@@ -21,7 +19,7 @@ class RecentNewsWidgetHandler
     protected $rss;
 
     /**
-     * Create a new RecentNewsWidgetHandler instance.
+     * Create a new RecentNewsWidgetLoader instance.
      *
      * @param \SimplePie $rss
      */
@@ -33,9 +31,9 @@ class RecentNewsWidgetHandler
     /**
      * Handle the widget data.
      *
-     * @param Widget $widget
+     * @param RecentNewsWidgetExtension $extension
      */
-    public function handle(Widget $widget)
+    public function handle(RecentNewsWidgetExtension $extension)
     {
         $items = app('cache')->remember(
             __METHOD__,
@@ -56,6 +54,6 @@ class RecentNewsWidgetHandler
         );
 
         // Load the items to the widget's view data.
-        $widget->addData('items', $items);
+        $extension->addWidgetData('items', $items);
     }
 }

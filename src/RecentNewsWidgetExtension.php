@@ -20,5 +20,4 @@ class RecentNewsWidgetExtension extends WidgetExtension
      * @var string
      */
     protected $provides = 'anomaly.module.dashboard::widget.recent_news';
-
 }
