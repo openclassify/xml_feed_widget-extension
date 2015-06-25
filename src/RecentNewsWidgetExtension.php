@@ -1,6 +1,6 @@
 <?php namespace Anomaly\RecentNewsWidgetExtension;
 
-use Anomaly\DashboardModule\Dashboard\Component\Widget\WidgetExtension;
+use Anomaly\DashboardModule\Widget\WidgetExtension;
 
 /**
  * Class RecentNewsWidgetExtension
