@@ -44,7 +44,7 @@ class RecentNewsWidgetLoader
                 $this->rss->enable_cache(false);
 
                 // Hard-code this for now.
-                $this->rss->set_feed_url('https://www.pyrocms.com/blog/rss/all.rss');
+                $this->rss->set_feed_url('http://www.pyrocms.com/blog/rss/all.rss');
 
                 // Make the request.
                 $this->rss->init();
