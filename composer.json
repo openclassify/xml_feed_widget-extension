@@ -2,16 +2,15 @@
     "name": "anomaly/recent_news_widget-extension",
     "type": "streams-addon",
     "description": "A dashboard widget displaying recent news from PyroCMS.com.",
-    "version": "1.0.0",
-    "license": "MIT",
     "keywords": [
-        "streams-addon",
-        "widget",
-        "recent-news",
-        "pyrocms",
-        "laravel"
+        "streams extension",
+        "streams dashboard widget",
+        "streams addon",
+        "extension"
     ],
     "homepage": "http://anomaly.is/",
+    "version": "1.0.0",
+    "license": "MIT",
     "authors": [
         {
             "name": "AnomalyLabs, Inc.",
@@ -36,8 +35,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0.x-dev"
+            "dev-1.0/master": "1.0.x-dev"
         }
-    },
-    "minimum-stability": "dev"
+    }
 }
