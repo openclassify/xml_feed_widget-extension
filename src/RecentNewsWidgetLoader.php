@@ -1,5 +1,7 @@
 <?php namespace Anomaly\RecentNewsWidgetExtension;
 
+use Illuminate\Cache\Repository;
+
 /**
  * Class RecentNewsWidgetLoader
  *
@@ -33,9 +35,9 @@ class RecentNewsWidgetLoader
      *
      * @param RecentNewsWidgetExtension $extension
      */
-    public function handle(RecentNewsWidgetExtension $extension)
+    public function handle(RecentNewsWidgetExtension $extension, Repository $cache)
     {
-        $items = app('cache')->remember(
+        $items = $cache->remember(
             __METHOD__,
             30,
             function () {
@@ -44,7 +46,7 @@ class RecentNewsWidgetLoader
                 $this->rss->enable_cache(false);
 
                 // Hard-code this for now.
-                $this->rss->set_feed_url('http://www.pyrocms.com/blog/rss/all.rss');
+                $this->rss->set_feed_url('http://www.pyrocms.com/posts/rss.xml');
 
                 // Make the request.
                 $this->rss->init();
