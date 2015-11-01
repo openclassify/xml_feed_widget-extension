@@ -1,12 +1,11 @@
 {
-    "name": "anomaly/recent_news_widget-extension",
+    "name": "anomaly/xml_feed_widget-extension",
     "type": "streams-addon",
-    "description": "A dashboard widget displaying recent news from PyroCMS.com.",
+    "description": "A dashboard widget that displays an XML feed.",
     "keywords": [
-        "streams extension",
-        "streams dashboard widget",
-        "streams addon",
-        "extension"
+        "streams",
+        "dashboard widget",
+        "xml"
     ],
     "homepage": "http://anomaly.is/",
     "license": "MIT",
@@ -26,7 +25,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Anomaly\\RecentNewsWidgetExtension\\": "src/"
+            "Anomaly\\XmlFeedWidgetExtension\\": "src/"
         },
         "psr-0": {
             "SimplePie": "vendor/simplepie/simplepie/library"
@@ -34,7 +33,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-1.0/master": "1.0.x-dev"
+            "dev-master": "1.1.x-dev"
         }
     }
 }

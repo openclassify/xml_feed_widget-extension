@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title'       => 'Recent News',
-    'name'        => 'Recent News Widget',
-    'description' => 'A dashboard widget displaying recent news from PyroCMS.com.'
+    'title'       => 'XML Feed',
+    'name'        => 'XML Deed Dashboard Widget',
+    'description' => 'A dashboard widget that displays an XML feed.'
 ];
