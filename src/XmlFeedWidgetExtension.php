@@ -21,7 +21,7 @@ class XmlFeedWidgetExtension extends WidgetExtension
      *
      * @var string
      */
-    protected $provides = 'anomaly.module.dashboard::widget.recent_news';
+    protected $provides = 'anomaly.module.dashboard::widget.xml_feed';
 
     /**
      * Load the widget data.
