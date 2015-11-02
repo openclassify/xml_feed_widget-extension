@@ -1,5 +1,6 @@
 <?php namespace Anomaly\XmlFeedWidgetExtension\Command;
 
+use Anomaly\ConfigurationModule\Configuration\Contract\ConfigurationRepositoryInterface;
 use Anomaly\DashboardModule\Widget\Contract\WidgetInterface;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Cache\Repository;
@@ -35,18 +36,24 @@ class LoadItems implements SelfHandling
     /**
      * Handle the widget data.
      */
-    public function handle(\SimplePie $rss, Repository $cache)
+    public function handle(\SimplePie $rss, Repository $cache, ConfigurationRepositoryInterface $configuration)
     {
         $items = $cache->remember(
             __METHOD__,
             30,
-            function () use ($rss) {
+            function () use ($rss, $configuration) {
 
                 // Let Laravel cache everything.
                 $rss->enable_cache(false);
 
                 // Hard-code this for now.
-                $rss->set_feed_url('http://www.pyrocms.com/posts/rss.xml');
+                $rss->set_feed_url(
+                    $configuration->value(
+                        'anomaly.extension.xml_feed_widget::url',
+                        $this->widget->getId(),
+                        'http://www.pyrocms.com/posts/rss.xml'
+                    )
+                );
 
                 // Make the request.
                 $rss->init();
