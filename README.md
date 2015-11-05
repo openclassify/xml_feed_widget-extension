@@ -1,4 +1,4 @@
-# Recent News Widget
+# XML Feed Widget
 
 *anomaly.extension.recent_news_widget*
 
