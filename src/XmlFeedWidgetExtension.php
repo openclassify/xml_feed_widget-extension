@@ -3,6 +3,7 @@
 use Anomaly\DashboardModule\Widget\Contract\WidgetInterface;
 use Anomaly\DashboardModule\Widget\Extension\WidgetExtension;
 use Anomaly\XmlFeedWidgetExtension\Command\LoadItems;
+use Anomaly\XmlFeedWidgetExtension\Command\SetContent;
 
 /**
  * Class XmlFeedWidgetExtension
@@ -31,5 +32,15 @@ class XmlFeedWidgetExtension extends WidgetExtension
     protected function load(WidgetInterface $widget)
     {
         $this->dispatch(new LoadItems($widget));
+    }
+
+    /**
+     * Set the widget content.
+     *
+     * @param WidgetInterface $widget
+     */
+    protected function content(WidgetInterface $widget)
+    {
+        $this->dispatch(new SetContent($widget));
     }
 }
