@@ -7,7 +7,7 @@
         </div>
 
         <div class="media-body">
-            <h2 class="media-heading">
+            <h4 class="media-heading">
                 <a href="{{ item.get_permalink() }}" target="_blank">
                     {{ item.get_title() }}
                 </a>
@@ -17,7 +17,7 @@
                 <small>
                     {{ item.get_date()|date('F j, Y') }}
                 </small>
-            </h2>
+            </h4>
 
             {{ item.get_description()|striptags }}
         </div>
