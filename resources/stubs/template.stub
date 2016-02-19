@@ -3,21 +3,21 @@
     <div class="media">
 
         <div class="media-left">
-            <i class="fa fa-calendar fa-2x text-muted"></i>
+            <i class="fa fa-calendar fa-lg text-muted"></i>
         </div>
 
         <div class="media-body">
-            <h4 class="media-heading">
+            <h3 class="media-heading">
                 <a href="{{ item.get_permalink() }}" target="_blank">
                     {{ item.get_title() }}
                 </a>
 
                 <br>
 
-                <small>
+                <small class="text-muted">
                     {{ item.get_date()|date('F j, Y') }}
                 </small>
-            </h4>
+            </h3>
 
             {{ item.get_description()|striptags }}
         </div>
