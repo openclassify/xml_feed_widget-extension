@@ -3,7 +3,7 @@
     <div class="media">
 
         <div class="media-left">
-            <i class="fa fa-calendar fa-lg text-muted"></i>
+            <i class="fa fa-calendar fa-lg text-faded"></i>
         </div>
 
         <div class="media-body">
