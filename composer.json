@@ -26,9 +26,6 @@
     "autoload": {
         "psr-4": {
             "Anomaly\\XmlFeedWidgetExtension\\": "src/"
-        },
-        "psr-0": {
-            "SimplePie": "vendor/simplepie/simplepie/library"
         }
     }
 }
