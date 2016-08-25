@@ -2,7 +2,6 @@
 
 use Anomaly\ConfigurationModule\Configuration\Contract\ConfigurationRepositoryInterface;
 use Anomaly\DashboardModule\Widget\Contract\WidgetInterface;
-use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Cache\Repository;
 
 /**
@@ -11,9 +10,8 @@ use Illuminate\Contracts\Cache\Repository;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\XmlFeedWidgetExtension\Command
  */
-class LoadItems implements SelfHandling
+class LoadItems
 {
 
     /**
