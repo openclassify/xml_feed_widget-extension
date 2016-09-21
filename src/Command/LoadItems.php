@@ -7,9 +7,9 @@ use Illuminate\Contracts\Cache\Repository;
 /**
  * Class LoadItems
  *
- * @link          http://pyrocms.com/
- * @author        PyroCMS, Inc. <support@pyrocms.com>
- * @author        Ryan Thompson <ryan@pyrocms.com>
+ * @link   http://pyrocms.com/
+ * @author PyroCMS, Inc. <support@pyrocms.com>
+ * @author Ryan Thompson <ryan@pyrocms.com>
  */
 class LoadItems
 {
@@ -33,13 +33,15 @@ class LoadItems
 
     /**
      * Handle the widget data.
+     *
+     * @param \SimplePie                       $rss
+     * @param Repository                       $cache
+     * @param ConfigurationRepositoryInterface $configuration
      */
     public function handle(\SimplePie $rss, Repository $cache, ConfigurationRepositoryInterface $configuration)
     {
-        $cache_key = __METHOD__.'_'.$this->widget->getId();
-
         $items = $cache->remember(
-            $cache_key,
+            __METHOD__ . '_' . $this->widget->getId(),
             30,
             function () use ($rss, $configuration) {
 
