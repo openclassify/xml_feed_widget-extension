@@ -36,8 +36,10 @@ class LoadItems
      */
     public function handle(\SimplePie $rss, Repository $cache, ConfigurationRepositoryInterface $configuration)
     {
+        $cache_key = __METHOD__.'_'.$this->widget->getId();
+
         $items = $cache->remember(
-            __METHOD__,
+            $cache_key,
             30,
             function () use ($rss, $configuration) {
 
