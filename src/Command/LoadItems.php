@@ -53,7 +53,7 @@ class LoadItems
                     $configuration->value(
                         'anomaly.extension.xml_feed_widget::url',
                         $this->widget->getId(),
-                        'http://www.pyrocms.com/posts/rss.xml'
+                        'http://pyrocms.com/posts/rss.xml'
                     )
                 );
 
