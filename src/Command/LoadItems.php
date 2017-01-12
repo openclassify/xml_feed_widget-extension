@@ -49,13 +49,13 @@ class LoadItems
                 $rss->enable_cache(false);
 
                 // Hard-code this for now.
-                $rss->set_feed_url(
+                $rss->set_raw_data(file_get_contents(
                     $configuration->value(
                         'anomaly.extension.xml_feed_widget::url',
                         $this->widget->getId(),
                         'http://pyrocms.com/posts/rss.xml'
                     )
-                );
+                ));
 
                 // Make the request.
                 $rss->init();
