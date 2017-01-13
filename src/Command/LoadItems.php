@@ -34,8 +34,8 @@ class LoadItems
     /**
      * Handle the widget data.
      *
-     * @param \SimplePie $rss
-     * @param Repository $cache
+     * @param \SimplePie                       $rss
+     * @param Repository                       $cache
      * @param ConfigurationRepositoryInterface $configuration
      */
     public function handle(\SimplePie $rss, Repository $cache, ConfigurationRepositoryInterface $configuration)
@@ -48,6 +48,13 @@ class LoadItems
                 // Let Laravel cache everything.
                 $rss->enable_cache(false);
 
+                $options = [
+                    'ssl' => [
+                        'verify_peer'      => false,
+                        'verify_peer_name' => false,
+                    ],
+                ];
+
                 // Hard-code this for now.
                 $rss->set_raw_data(
                     file_get_contents(
@@ -55,7 +62,9 @@ class LoadItems
                             'anomaly.extension.xml_feed_widget::url',
                             $this->widget->getId(),
                             'http://pyrocms.com/posts/rss.xml'
-                        )
+                        ),
+                        false,
+                        stream_context_create($options)
                     )
                 );
 
