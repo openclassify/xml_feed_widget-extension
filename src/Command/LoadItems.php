@@ -3,6 +3,7 @@
 use Anomaly\ConfigurationModule\Configuration\Contract\ConfigurationRepositoryInterface;
 use Anomaly\DashboardModule\Widget\Contract\WidgetInterface;
 use Illuminate\Contracts\Cache\Repository;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
  * Class LoadItems
@@ -13,6 +14,8 @@ use Illuminate\Contracts\Cache\Repository;
  */
 class LoadItems
 {
+
+    use DispatchesJobs;
 
     /**
      * The widget instance.
@@ -45,33 +48,30 @@ class LoadItems
             30,
             function () use ($rss, $configuration) {
 
-                // Let Laravel cache everything.
-                $rss->enable_cache(false);
+                try {
 
-                $options = [
-                    'ssl' => [
-                        'verify_peer'      => false,
-                        'verify_peer_name' => false,
-                    ],
-                ];
+                    /**
+                     * This is the way it SHOULD work. But
+                     * sometimes things go wrong like TLS
+                     * issues on websites and such.
+                     */
+                    return $this->dispatch(new FetchCurlContent($this->widget));
+                } catch (\Exception $e) {
 
-                // Hard-code this for now.
-                $rss->set_raw_data(
-                    file_get_contents(
-                        $configuration->value(
-                            'anomaly.extension.xml_feed_widget::url',
-                            $this->widget->getId(),
-                            'http://pyrocms.com/posts/rss.xml'
-                        ),
-                        false,
-                        stream_context_create($options)
-                    )
-                );
+                    /**
+                     * This is a workaround in-case anything
+                     * screwy goes on in the above command
+                     * then this is a brute-force backup.
+                     */
+                    return $this->dispatch(new FetchRawContent($this->widget));
+                } finally {
 
-                // Make the request.
-                $rss->init();
-
-                return $rss->get_items(0, 5);
+                    /**
+                     * If everything above fails then we have
+                     * an issue. Return false to let us know.
+                     */
+                    return false;
+                }
             }
         );
 
