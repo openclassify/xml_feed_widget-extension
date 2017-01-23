@@ -51,26 +51,29 @@ class LoadItems
                 try {
 
                     /**
-                     * This is the way it SHOULD work. But
-                     * sometimes things go wrong like TLS
-                     * issues on websites and such.
-                     */
-                    return $this->dispatch(new FetchCurlContent($this->widget));
-                } catch (\Exception $e) {
-
-                    /**
-                     * This is a workaround in-case anything
-                     * screwy goes on in the above command
-                     * then this is a brute-force backup.
+                     * This should work and is more SSL friendly
+                     * with providers like CloudFlare but can
+                     * be disabled by security in some cases.
                      */
                     return $this->dispatch(new FetchRawContent($this->widget));
-                } finally {
+                } catch (\Exception $e) {
 
-                    /**
-                     * If everything above fails then we have
-                     * an issue. Return false to let us know.
-                     */
-                    return false;
+                    try {
+
+                        /**
+                         * If security is disabling file_get_contents
+                         * then this way should work fine unless
+                         * there is an SSL / TLS issue.
+                         */
+                        return $this->dispatch(new FetchCurlContent($this->widget));
+                    } catch (\Exception $e) {
+
+                        /**
+                         * If everything above fails then we have
+                         * an issue. Return false to let us know.
+                         */
+                        return false;
+                    }
                 }
             }
         );
