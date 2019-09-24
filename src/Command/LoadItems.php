@@ -2,8 +2,6 @@
 
 use Anomaly\ConfigurationModule\Configuration\Contract\ConfigurationRepositoryInterface;
 use Anomaly\DashboardModule\Widget\Contract\WidgetInterface;
-use Illuminate\Contracts\Cache\Repository;
-use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
  * Class LoadItems
@@ -14,8 +12,6 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
  */
 class LoadItems
 {
-
-    use DispatchesJobs;
 
     /**
      * The widget instance.
@@ -37,17 +33,15 @@ class LoadItems
     /**
      * Handle the widget data.
      *
-     * @param \SimplePie                       $rss
-     * @param Repository                       $cache
+     * @param \SimplePie $rss
      * @param ConfigurationRepositoryInterface $configuration
      */
-    public function handle(\SimplePie $rss, Repository $cache, ConfigurationRepositoryInterface $configuration)
+    public function handle(\SimplePie $rss, ConfigurationRepositoryInterface $configuration)
     {
-        $items = $cache->remember(
+        $items = cache(
             __METHOD__ . '_' . $this->widget->getId(),
             30,
             function () use ($rss, $configuration) {
-
                 try {
 
                     /**
@@ -55,9 +49,8 @@ class LoadItems
                      * with providers like CloudFlare but can
                      * be disabled by security in some cases.
                      */
-                    return $this->dispatch(new FetchRawContent($this->widget));
+                    return dispatch_now(new FetchRawContent($this->widget));
                 } catch (\Exception $e) {
-
                     try {
 
                         /**
@@ -65,7 +58,7 @@ class LoadItems
                          * then this way should work fine unless
                          * there is an SSL / TLS issue.
                          */
-                        return $this->dispatch(new FetchCurlContent($this->widget));
+                        return dispatch_now(new FetchCurlContent($this->widget));
                     } catch (\Exception $e) {
 
                         /**
