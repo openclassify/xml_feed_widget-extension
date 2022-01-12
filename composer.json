@@ -21,7 +21,7 @@
         "email": "support@anomaly.is"
     },
     "require": {
-        "simplepie/simplepie": "~1.4.0"
+        "simplepie/simplepie": "~1.5.0"
     },
     "autoload": {
         "psr-4": {
