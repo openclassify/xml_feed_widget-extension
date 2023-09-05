@@ -3,7 +3,6 @@
 use Anomaly\ConfigurationModule\Configuration\Contract\ConfigurationRepositoryInterface;
 use Anomaly\DashboardModule\Widget\Contract\WidgetInterface;
 use Illuminate\Contracts\Cache\Repository;
-use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
  * Class LoadItems
@@ -14,9 +13,6 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
  */
 class LoadItems
 {
-
-    use DispatchesJobs;
-
     /**
      * The widget instance.
      *
@@ -55,7 +51,7 @@ class LoadItems
                      * with providers like CloudFlare but can
                      * be disabled by security in some cases.
                      */
-                    return $this->dispatch(new FetchRawContent($this->widget));
+                    return dispatch_sync(new FetchRawContent($this->widget));
                 } catch (\Exception $e) {
 
                     try {
@@ -65,7 +61,7 @@ class LoadItems
                          * then this way should work fine unless
                          * there is an SSL / TLS issue.
                          */
-                        return $this->dispatch(new FetchCurlContent($this->widget));
+                        return dispatch_sync(new FetchCurlContent($this->widget));
                     } catch (\Exception $e) {
 
                         /**

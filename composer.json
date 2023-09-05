@@ -21,6 +21,7 @@
         "email": "support@anomaly.is"
     },
     "require": {
+        "anomaly/streams-platform": "^1.8",
         "simplepie/simplepie": "^1.5"
     },
     "autoload": {
