@@ -12,7 +12,6 @@ use Anomaly\DashboardModule\Widget\Contract\WidgetInterface;
  */
 class LoadItems
 {
-
     /**
      * The widget instance.
      *
@@ -49,7 +48,8 @@ class LoadItems
                      * with providers like CloudFlare but can
                      * be disabled by security in some cases.
                      */
-                    return dispatch_now(new FetchRawContent($this->widget));
+                    return dispatch_sync(new FetchRawContent($this->widget));
+
                 } catch (\Exception $e) {
                     try {
 
@@ -58,7 +58,7 @@ class LoadItems
                          * then this way should work fine unless
                          * there is an SSL / TLS issue.
                          */
-                        return dispatch_now(new FetchCurlContent($this->widget));
+                        return dispatch_sync(new FetchCurlContent($this->widget));
                     } catch (\Exception $e) {
 
                         /**

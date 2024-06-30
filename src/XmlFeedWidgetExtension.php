@@ -29,6 +29,6 @@ class XmlFeedWidgetExtension extends WidgetExtension
      */
     protected function load(WidgetInterface $widget)
     {
-        dispatch_now(new LoadItems($widget));
+        dispatch_sync(new LoadItems($widget));
     }
 }
