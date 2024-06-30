@@ -2,7 +2,6 @@
 
 use Anomaly\ConfigurationModule\Configuration\Contract\ConfigurationRepositoryInterface;
 use Anomaly\DashboardModule\Widget\Contract\WidgetInterface;
-use Illuminate\Contracts\Cache\Repository;
 
 /**
  * Class LoadItems
@@ -33,17 +32,15 @@ class LoadItems
     /**
      * Handle the widget data.
      *
-     * @param \SimplePie                       $rss
-     * @param Repository                       $cache
+     * @param \SimplePie $rss
      * @param ConfigurationRepositoryInterface $configuration
      */
-    public function handle(\SimplePie $rss, Repository $cache, ConfigurationRepositoryInterface $configuration)
+    public function handle(\SimplePie $rss, ConfigurationRepositoryInterface $configuration)
     {
-        $items = $cache->remember(
+        $items = cache(
             __METHOD__ . '_' . $this->widget->getId(),
             30,
             function () use ($rss, $configuration) {
-
                 try {
 
                     /**
@@ -52,8 +49,8 @@ class LoadItems
                      * be disabled by security in some cases.
                      */
                     return dispatch_sync(new FetchRawContent($this->widget));
-                } catch (\Exception $e) {
 
+                } catch (\Exception $e) {
                     try {
 
                         /**

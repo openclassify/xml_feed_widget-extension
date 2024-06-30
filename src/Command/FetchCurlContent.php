@@ -33,7 +33,7 @@ class FetchCurlContent
     /**
      * Handle the command.
      *
-     * @param \SimplePie                       $rss
+     * @param \SimplePie $rss
      * @param ConfigurationRepositoryInterface $configuration
      * @return null|\SimplePie_Item[]
      */
